@@ -1,0 +1,8 @@
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+
+.tests/
