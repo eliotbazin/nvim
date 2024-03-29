@@ -88,7 +88,7 @@ return require('packer').startup(function(use)
   use('santos-gabriel-dario/darcula-solid.nvim')
 
   -- Git --
-  -- use "lewis6991/gitsigns.nvim"
+  use('lewis6991/gitsigns.nvim')
 
   -- VimTex
   use('lervag/vimtex') -- Integrates LaTeX into Neovim
