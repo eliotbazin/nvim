@@ -1,40 +1,33 @@
 local fn = vim.fn
 
--- Automatically install packer
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({
+-- Lazy bootstrap
+local install_path = fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not (vim.uv or vim.loop).fs_stat(install_path) then
+  vim.fn.system({
     'git',
     'clone',
-    '--depth',
+    '--filter=blob:none',
     '1',
-    'https://github.com/wbthomason/packer.nvim',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
     install_path,
   })
-  print('Installing packer close and reopen Neovim...')
-  vim.cmd([[packadd packer.nvim]])
+  print('Installing lazy.nvim close and reopen Neovim...')
 end
+vim.opt.rtp:prepend(install_path)
 
--- Check whether packer exists
-local status_ok, packer = pcall(require, 'packer')
+-- Check whether lazy exists
+local status_ok, lazy = pcall(require, 'lazy')
 if not status_ok then
-  vim.notify('Could not find Packer')
+  vim.notify('Could not find lazy')
   return
 end
 
--- Have packer use a popup window
-packer.init({
-  display = {
-    open_fn = function()
-      return require('packer.util').float({ border = 'rounded' })
-    end,
-  },
-})
+-- Autocommand that syncs lazy whenever the plugins.lua file is saved
+-- vim.api.nvim_command('autocmd BufWritePost plugins.lua source % | PackerSync')
+lazy.setup('plugins', {})
 
--- Autocommand that syncs packer whenever the plugins.lua file is saved
-vim.api.nvim_command('autocmd BufWritePost plugins.lua source % | PackerSync')
-
--- Load plugins --
+--[[ Load plugins --
 return require('packer').startup(function(use)
   -- Dependencies --
   use('wbthomason/packer.nvim') -- Let packer manage itself
@@ -102,4 +95,4 @@ return require('packer').startup(function(use)
   if PACKER_BOOTSTRAP then
     require('packer').sync()
   end
-end)
+end)]] --
