@@ -28,7 +28,7 @@ return function()
       '󱋡 Recently used files',
       "<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
     ),
-    dashboard.button('c', '  Configuration', ':e $XDG_CONFIG_HOME/nvim/init.lua<CR>'),
+    dashboard.button('c', '  Configuration', ':e $LOCALAPPDATA/nvim/init.lua<CR>'), -- Windows only
     dashboard.button('q', '󰅙 Quit Neovim', ':qa<CR>'),
     { type = 'padding', val = 1 },
   }
