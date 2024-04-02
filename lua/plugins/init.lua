@@ -80,8 +80,8 @@ return {
   },
   { -- Indentline
     'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
     config = require(path .. 'indentline'),
-    version = 'v2.20.8',
   },
   { -- telescope
     'nvim-telescope/telescope.nvim',
