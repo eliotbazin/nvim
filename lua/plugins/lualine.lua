@@ -6,9 +6,10 @@ return function()
 
   -- GIT --
   local branch = {
-    'branch',
+    'b:gitsigns_head',
     icons_enabled = true,
     icon = '',
+    color = 'lualine_a_normal',
   }
 
   local diff = {
@@ -16,6 +17,17 @@ return function()
     colored = true,
     symbols = { added = ' ', modified = ' ', removed = ' ' }, -- changes diff symbols
     cond = hide_in_width,
+    -- Set diff source to gitsigns
+    source = function()
+      local gitsigns = vim.b.gitsigns_status_dict
+      if gitsigns then
+        return {
+          added = gitsigns.added,
+          modified = gitsigns.changed,
+          removed = gitsigns.removed,
+        }
+      end
+    end,
   }
 
   -- Copilot --
@@ -24,15 +36,13 @@ return function()
     show_colors = true,
   }
 
-  -- Other --
-  local diagnostics = {
-    'diagnostics',
-    sources = { 'nvim_diagnostic' },
-    sections = { 'error', 'warn' },
-    symbols = { error = ' ', warn = ' ' },
-    colored = true,
-    update_in_insert = false,
-    always_visible = true,
+  -- File --
+  local filepath = {
+    'filename',
+    path = 1,
+    file_status = false,
+    cond = hide_in_width,
+    max_length = vim.o.columns / 3,
   }
 
   local filetype = {
@@ -40,16 +50,6 @@ return function()
     colored = true,
     icons_enabled = true,
     icon = { align = 'right' },
-  }
-
-  -- Filepath --
-  local filepath = {
-    'filename',
-    path = 1,
-    file_status = false,
-    color = 'lualine_c_normal',
-    cond = hide_in_width,
-    max_length = vim.o.columns / 3,
   }
 
   -- Buffers --
@@ -72,6 +72,17 @@ return function()
     max_length = vim.o.columns * 2 / 3,
   }
 
+  -- Diagnostics --
+  local diagnostics = {
+    'diagnostics',
+    sources = { 'nvim_diagnostic' },
+    sections = { 'error', 'warn' },
+    symbols = { error = ' ', warn = ' ' },
+    colored = true,
+    update_in_insert = false,
+    always_visible = true,
+  }
+
   require('lualine').setup({
     options = {
       icons_enabled = true,
@@ -89,11 +100,11 @@ return function()
     },
     sections = {
       lualine_a = { 'mode' },
-      lualine_b = { diagnostics, branch },
-      lualine_c = { copilot },
+      lualine_b = { diagnostics, copilot },
+      lualine_c = {},
       lualine_x = {},
-      lualine_y = { diff, 'encoding', filetype },
-      lualine_z = { 'location', { 'progress', cond = hide_in_width } },
+      lualine_y = { diff, filetype },
+      lualine_z = { 'encoding', 'location', { 'progress', cond = hide_in_width } },
     },
     inactive_sections = {
       lualine_a = {},
@@ -105,9 +116,9 @@ return function()
     },
     tabline = {},
     winbar = {
-      lualine_a = { filepath },
+      lualine_a = { branch },
       lualine_b = {},
-      lualine_c = {},
+      lualine_c = { filepath },
       lualine_x = {},
       lualine_y = {},
       lualine_z = { buffers },
