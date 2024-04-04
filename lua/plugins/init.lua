@@ -86,6 +86,7 @@ return {
   { -- telescope
     'nvim-telescope/telescope.nvim',
     dependencies = {
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-ui-select.nvim', -- Use telescope for more selections
       'kyazdani42/nvim-web-devicons',
