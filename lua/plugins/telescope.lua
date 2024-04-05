@@ -6,6 +6,7 @@ return function()
       prompt_prefix = ' ',
       selection_caret = ' ',
       path_display = { 'smart' },
+      file_ignore_patterns = { '.git\\', '.cache\\', '%.o', '%.a', '%.out', '%.class', '%.mkv', '%.zip' },
 
       pickers = {
         current_buffer_fuzzy_find = {
