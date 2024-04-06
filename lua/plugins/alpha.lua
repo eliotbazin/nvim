@@ -12,23 +12,11 @@ return function()
   }
   dashboard.section.buttons.val = {
     { type = 'text', val = 'Shortcuts', opts = { hl = 'SpecialComment', position = 'center' } },
-    dashboard.button(
-      'f',
-      '󰈞 Find file',
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>"
-    ),
+    dashboard.button('f', '󰈞 Find file', '<cmd>Telescope find_files<cr>'),
     dashboard.button('e', '󰝒 New file', '<cmd>ene <bar> startinsert <cr>'),
-    dashboard.button(
-      'p',
-      '  Find project',
-      '<cmd>lua require("telescope").extensions.projects.projects(require("telescope.themes").get_dropdown({ previewer = false }))<CR>'
-    ),
-    dashboard.button(
-      'r',
-      '󱋡 Recently used files',
-      "<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
-    ),
-    dashboard.button('c', '  Configuration', ':e $LOCALAPPDATA/nvim/init.lua<CR>'), -- Windows only
+    dashboard.button('p', ' Find project', '<cmd>Telescope projects<cr>'),
+    dashboard.button('r', '󱋡 Recently used files', '<cmd>Telescope oldfiles<cr>'),
+    dashboard.button('c', ' Configuration', ':e $LOCALAPPDATA/nvim/init.lua<CR>'), -- Windows only
     dashboard.button('q', '󰅙 Quit Neovim', ':qa<CR>'),
     { type = 'padding', val = 1 },
   }
