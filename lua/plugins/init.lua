@@ -2,30 +2,32 @@ local path = (...):match('(.-)[^%.]+$') .. 'plugins.'
 
 return {
   -- DEPENDENCIES --
-  'nvim-lua/plenary.nvim',
-  'kyazdani42/nvim-web-devicons',
+  { 'nvim-lua/plenary.nvim', lazy = true },
+  { 'kyazdani42/nvim-web-devicons', lazy = true },
 
   -- LSP --
   {
     'neovim/nvim-lspconfig',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp', -- To set capabilities
+      'williamboman/mason-lspconfig.nvim',
     },
+    event = { 'BufReadPre', 'BufNewFile' },
     config = require(path .. 'lsp.handlers').setup,
   },
   { -- Mason
     'williamboman/mason.nvim',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      'williamboman/mason-lspconfig.nvim',
-    },
+    cmd = 'Mason',
+    build = ':MasonUpdate',
     config = require(path .. 'lsp.mason'),
   },
   { -- null-ls
     'jose-elias-alvarez/null-ls.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'williamboman/mason.nvim',
     },
+    event = { 'BufReadPre', 'BufNewFile' },
     config = require(path .. 'lsp.null-ls'),
   },
 
@@ -56,6 +58,7 @@ return {
         dependencies = { 'lervag/vimtex' },
       },
     },
+    event = 'VeryLazy',
     config = require(path .. 'cmp'),
   },
 
@@ -66,7 +69,10 @@ return {
       'rktjmp/lush.nvim',
     },
     config = require(path .. 'colorscheme'),
-    priority = 100, -- Load first
+    -- Load first
+    lazy = false,
+    priority = 1000,
+    event = 'VimEnter',
   },
   { -- Greeeter
     'goolord/alpha-nvim',
@@ -75,12 +81,15 @@ return {
   },
   { -- treesitter
     'nvim-treesitter/nvim-treesitter',
+    -- event = { 'BufWinEnter', 'BufNewFile' },
+    event = 'VeryLazy',
     config = require(path .. 'treesitter'),
     --build = '<cmd>TSUpdate',
   },
   { -- Indentline
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
+    event = 'VeryLazy',
     config = require(path .. 'indentline'),
   },
   { -- telescope
@@ -90,6 +99,9 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-ui-select.nvim', -- Use telescope for more selections
       'kyazdani42/nvim-web-devicons',
+      'ahmedkhalf/project.nvim',
+    },
+    cmd = 'Telescope',
     keys = {
       { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
       { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Find recent files' },
@@ -102,6 +114,7 @@ return {
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
+    cmd = 'NvimTreeToggle',
     keys = {
       { '<leader>e', '<cmd>NvimTreeToggle<cr>', desc = 'Explorer' },
     },
@@ -113,6 +126,7 @@ return {
       'kyazdani42/nvim-web-devicons',
       'AndreM222/copilot-lualine',
     },
+    event = 'VeryLazy',
     key = {
       { '<c-u>', "<cmd>lua require'luasnip.extras.select_choice'()<cr>", desc = 'Open choice menu for snippets' },
     },
@@ -123,20 +137,26 @@ return {
     keys = {
       { '<c-t>', '<cmd>ToggleTerm<cr>', desc = 'Toggle terminal' },
     },
+    cmd = 'ToggleTerm',
     config = require(path .. 'toggleterm'),
   },
   { -- Gitsigns
     'lewis6991/gitsigns.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = require(path .. 'gitsigns'),
   },
   --- VIMTEX ---
   {
     'lervag/vimtex',
+    ft = { 'tex', 'bib', 'cls' },
     config = require(path .. 'vimtex'),
   },
 
   --- UTILS ---
-  'moll/vim-bbye', -- Better buffer closing
+  { -- Better buffer closing
+    'moll/vim-bbye',
+    event = 'BufWinLeave',
+  },
   { -- autopairs
     'windwp/nvim-autopairs',
     dependencies = {
@@ -147,10 +167,12 @@ return {
   },
   { -- Comment
     'numToStr/comment.nvim',
+    event = 'BufReadPost',
     config = require(path .. 'comment'),
   },
   { -- Project
     'ahmedkhalf/project.nvim',
+    event = 'VeryLazy',
     config = require(path .. 'project'),
   },
 }
