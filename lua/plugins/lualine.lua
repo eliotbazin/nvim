@@ -97,6 +97,7 @@ return function()
         winbar = { 'help', 'packer', 'Trouble', 'Outline', 'toggleterm' },
       },
       always_divide_middle = true,
+      globalstatus = true,
     },
     sections = {
       lualine_a = { 'mode' },
@@ -114,8 +115,7 @@ return function()
       lualine_y = {},
       lualine_z = {},
     },
-    tabline = {},
-    winbar = {
+    tabline = {
       lualine_a = { branch },
       lualine_b = {},
       lualine_c = { filepath },
@@ -123,14 +123,9 @@ return function()
       lualine_y = {},
       lualine_z = { buffers },
     },
-    inactive_winbar = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = { buffers },
-    },
+    winbar = {},
+    inactive_winbar = {},
     extensions = {},
   })
+  vim.opt.showtabline = 2
 end
