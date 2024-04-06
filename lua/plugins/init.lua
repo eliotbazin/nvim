@@ -90,6 +90,10 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-ui-select.nvim', -- Use telescope for more selections
       'kyazdani42/nvim-web-devicons',
+    keys = {
+      { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
+      { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Find recent files' },
+      { '<leader>fb', '<cmd>Telescope current_buffer_fuzzy_find<cr>', desc = 'Search buffer' },
     },
     config = require(path .. 'telescope'),
   },
@@ -97,6 +101,9 @@ return {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
+    },
+    keys = {
+      { '<leader>e', '<cmd>NvimTreeToggle<cr>', desc = 'Explorer' },
     },
     config = require(path .. 'nvim-tree'),
   },
@@ -106,10 +113,16 @@ return {
       'kyazdani42/nvim-web-devicons',
       'AndreM222/copilot-lualine',
     },
+    key = {
+      { '<c-u>', "<cmd>lua require'luasnip.extras.select_choice'()<cr>", desc = 'Open choice menu for snippets' },
+    },
     config = require(path .. 'lualine'),
   },
   { -- Toggleterm
     'akinsho/toggleterm.nvim',
+    keys = {
+      { '<c-t>', '<cmd>ToggleTerm<cr>', desc = 'Toggle terminal' },
+    },
     config = require(path .. 'toggleterm'),
   },
   { -- Gitsigns

@@ -57,20 +57,5 @@ keymap('v', '<M-k>', ":m '<-2<CR>gv=gv", { desc = 'Move selected text up' })
 
 keymap('v', 'p', '_dP', { desc = 'Keep copied text' })
 
--- Telescope
-keymap(
-  'n',
-  '<leader>f',
-  "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
-  { desc = 'Open telescope' }
-)
--- keymap("n", "<leader>fr", "<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false }))<CR>")
-
--- nvim-tree
-keymap('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { desc = 'Toggle tree' })
-
 -- LSP
 keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.float<cr>', { desc = 'Show diagnostics' })
-
--- Luasnip choice
-keymap('i', '<C-u>', "<cmd>lua require'luasnip.extras.select_choice'()<cr>", { desc = 'Open choice menu for snippets' })
