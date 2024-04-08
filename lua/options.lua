@@ -8,7 +8,7 @@ set.relativenumber = false -- Show relative line numbers
 set.number = true -- Shows absolute line number (when relativenumber=true, absolute number is shown on selected line)
 
 -- Search options
-set.ignorecase = true -- Ignore case when searching 
+set.ignorecase = true -- Ignore case when searching
 set.smartcase = true -- If mixed case is used in search it assumes you want case-sensitive
 
 -- Line wrapping
@@ -41,13 +41,13 @@ set.showmode = false
 set.smartindent = true
 
 -- Treat '-' as character
-vim.cmd [[set iskeyword+=-]]
+vim.cmd([[set iskeyword+=-]])
 
 -- Backspace
-set.backspace = "indent,eol,start" -- Allow backspace on indent, end of line or insert mode start position
+set.backspace = 'indent,eol,start' -- Allow backspace on indent, end of line or insert mode start position
 
 -- Clipboard
-set.clipboard:append("unnamedplus") -- Use system clipboard as default register
+set.clipboard:append('unnamedplus') -- Use system clipboard as default register
 
 -- Disable built-in intro message
 set.shortmess:append('I')
