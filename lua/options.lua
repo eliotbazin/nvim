@@ -53,3 +53,7 @@ set.clipboard:append('unnamedplus') -- Use system clipboard as default register
 set.shortmess:append('I')
 
 vim.loader.enable() -- Speed up loading of modules
+
+-- Spelling
+set.spell = true
+set.spelllang = { 'en', 'da' }
