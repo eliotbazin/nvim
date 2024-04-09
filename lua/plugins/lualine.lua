@@ -83,6 +83,11 @@ return function()
     always_visible = true,
   }
 
+  -- Spell languages --
+  local spell = function()
+    return vim.opt.spelllang['_value']
+  end
+
   require('lualine').setup({
     options = {
       icons_enabled = true,
@@ -101,11 +106,11 @@ return function()
     },
     sections = {
       lualine_a = { 'mode' },
-      lualine_b = { diagnostics, copilot },
-      lualine_c = {},
+      lualine_b = { diagnostics, diff },
+      lualine_c = { copilot },
       lualine_x = {},
-      lualine_y = { diff, filetype },
-      lualine_z = { 'encoding', 'location', { 'progress', cond = hide_in_width } },
+      lualine_y = { spell, 'encoding', filetype },
+      lualine_z = { 'location', { 'progress', cond = hide_in_width } },
     },
     inactive_sections = {
       lualine_a = {},
