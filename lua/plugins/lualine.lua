@@ -52,6 +52,12 @@ return function()
     icon = { align = 'right' },
   }
 
+  -- Only show encoding if not UTF-8
+  local encoding = function()
+    local ret, _ = (vim.bo.fenc or vim.go.enc):gsub('^utf%-8$', '')
+    return ret
+  end
+
   -- Buffers --
   local buffers = {
     'buffers',
@@ -109,7 +115,7 @@ return function()
       lualine_b = { diagnostics, diff },
       lualine_c = { copilot },
       lualine_x = {},
-      lualine_y = { spell, 'encoding', filetype },
+      lualine_y = { spell, encoding, filetype },
       lualine_z = { 'location', { 'progress', cond = hide_in_width } },
     },
     inactive_sections = {
