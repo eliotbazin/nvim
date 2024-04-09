@@ -15,10 +15,10 @@ set.smartcase = true -- If mixed case is used in search it assumes you want case
 set.wrap = false -- Disable line wrapping
 
 -- Scrolloff
-set.scrolloff = 3 -- Keep 3 lines below and above curser when scrolling
-set.sidescrolloff = 6 -- Keep 6 characters on either side of the curser
+set.scrolloff = 3 -- Keep 3 lines below and above cursor when scrolling
+set.sidescrolloff = 6 -- Keep 6 characters on either side of the cursor
 
--- Cursorline
+-- Cursor line
 set.cursorline = true -- Highlights the current line
 
 -- Split windows
@@ -37,7 +37,7 @@ set.mouse = 'a'
 -- Hide current mode
 set.showmode = false
 
--- Smart autoindenting when starting a new line
+-- Smart auto indenting when starting a new line
 set.smartindent = true
 
 -- Treat '-' as character
