@@ -57,3 +57,8 @@ vim.loader.enable() -- Speed up loading of modules
 -- Spelling
 set.spell = true
 set.spelllang = { 'en', 'da' }
+vim.api.nvim_create_autocmd('TermOpen', {
+  callback = function()
+    vim.cmd('setlocal nospell')
+  end,
+})
