@@ -1,28 +1,29 @@
 return function()
   vim.g.tex_flavor = 'latex'
 
-  -- vim.g.vimtex_compiler_method = "latexmk"
-  -- vim.g.vimtex_compiler_latexmk = {
-  --   callback = 1,
-  --   continuous = 1,
-  --   executable = "latexmk",
-  --   options = {
-  --     "-shell-escape",
-  --     "-verbose",
-  --     "-file-line-error",
-  --     "-synctex=1",
-  --     "-interaction=nonstopmode",
-  --   },
-  -- }
+  vim.g.vimtex_compiler_method = 'latexmk'
+  vim.g.vimtex_compiler_latexmk = {
+    callback = 1,
+    continuous = 0, -- set to 1 for continuous mode
+    executable = 'latexmk',
+    out_dir = '../out',
+    options = {
+      '-shell-escape',
+      '-verbose',
+      '-file-line-error',
+      '-synctex=0', -- enable synctex
+      '-interaction=nonstopmode',
+    },
+  }
 
   -- Disable imaps
   vim.g.vimtex_imaps_enabled = 0
 
-  -- -- Open pdfviwer on compile
-  -- vim.g.vimtex_view_automatic = 0
+  -- Open pdfviwer on compile
+  vim.g.vimtex_view_automatic = 1
 
   -- Enable syntaxhighlighting
-  -- vim.g.vimtex_syntax = true
+  vim.g.vimtex_syntax_enabled = 1
 
   -- Enable conceal
   vim.opt.conceallevel = 2
