@@ -28,21 +28,21 @@ return function()
   -- Enable conceal
   vim.opt.conceallevel = 2
   vim.opt.concealcursor = 'vc'
-  vim.api.nvim_set_hl(0, 'Conceal', { link = 'texSymbol' }) -- Make consealed text the same color as other text
+  vim.api.nvim_set_hl(0, 'Conceal', { link = 'texMathSymbol' }) -- Make consealed text the same color as other text
   vim.g.vimtex_syntax_conceal = {
     accents = 1,
     cites = 1,
     fancy = 1,
     greek = 1,
     math_bounds = 0,
-    math_delimiters = 0,
-    math_fracs = 0,
+    math_delimiters = 1,
+    math_fracs = 1,
     math_super_sub = 0,
     math_symbols = 1,
     sections = 0,
     styles = 1,
   }
-  -- -- Disable quickfix auto open
+  vim.g.vimtex_syntax_conceal_cites = { type = 'brackets', verbose = false }
   -- vim.g.vimtex_quickfix_ignore_mode = 0
   -- vim.g.vimtex_compiler_progname = "nvr"
   -- -- PDF viewer settings
